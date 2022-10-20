@@ -18,6 +18,23 @@ function ISWorldMapSymbols:createChildren()
     self:addChild(self.toggleFactionMapButton)
     self:setHeight(self.toggleFactionMapButton:getBottom() + 20)
     self:checkInventory()
+
+    -- Patch for 2701170568\mods\ExtraMapSymbolsUI\media\lua\client\ExtraMapSymbolsUI.lua
+    if self.extraUI_Refresh then
+        local old_extraUI_Refresh = self.extraUI_Refresh
+        self.extraUI_Refresh = function(...)
+            local ret = { old_extraUI_Refresh(self, ...) }
+
+            local y = self.removeBtn:getBottom() + btnPad
+            self.toggleFactionMapButton:setY(y)
+            self.toggleFactionMapButton:setX(self.removeBtn:getX())
+            self.toggleFactionMapButton:setWidth(self.removeBtn:getWidth())
+            self:setHeight(self.toggleFactionMapButton:getBottom() + 20)
+
+            return unpack(ret)
+        end
+    end
+
     return result
 end
 
@@ -29,7 +46,7 @@ function ISWorldMapSymbols:checkInventory()
     end
 
     self.toggleFactionMapButton.enable = FactionMap:isPlayerInAFaction()
-    
+
     if not FactionMap:isPlayerInAFaction() then
         local title = 'You Are Not In A Faction'
         self.toggleFactionMapButton:setTitle(title)
@@ -37,8 +54,8 @@ function ISWorldMapSymbols:checkInventory()
     end
 
     local playerFactionName = FactionMap:getPlayerFactionName()
-    local showTitle = '"'..playerFactionName .. '" map is [DISABLED]'
-    local hideTitle = '"'..playerFactionName .. '" map is [ENABLED]'
+    local showTitle = '"' .. playerFactionName .. '" map is [DISABLED]'
+    local hideTitle = '"' .. playerFactionName .. '" map is [ENABLED]'
     self.toggleFactionMapButton:setTitle(FactionMap.isToggled and hideTitle or showTitle)
 
     return result
@@ -52,7 +69,7 @@ end
 local old_ISWorldMap_close = ISWorldMap.close
 function ISWorldMap:close()
     local result = old_ISWorldMap_close(self)
-    
+
     FactionMap:storeCurrentMap()
     if FactionMap:isPlayerInAFaction() then
         -- HaloTextHelper.addTextWithArrow(self.character, 'Sending Faction Map...', true, HaloTextHelper.getColorGreen())
@@ -83,9 +100,9 @@ end
 
 local old_ISWorldMap_ToggleWorldMap = ISWorldMap.ToggleWorldMap
 function ISWorldMap.ToggleWorldMap(playerNum)
-	local result = old_ISWorldMap_ToggleWorldMap(playerNum)
+    local result = old_ISWorldMap_ToggleWorldMap(playerNum)
     FactionMap:requestFactionMapData()
-	return result
+    return result
 end
 
 local function defaultSendFactionCheck()
@@ -97,38 +114,37 @@ end
 
 local old_ISWorldMapSymbolTool_AddSymbol_addSymbol = ISWorldMapSymbolTool_AddSymbol.addSymbol
 function ISWorldMapSymbolTool_AddSymbol:addSymbol(x, y)
-	local result = old_ISWorldMapSymbolTool_AddSymbol_addSymbol(self, x, y)
+    local result = old_ISWorldMapSymbolTool_AddSymbol_addSymbol(self, x, y)
     defaultSendFactionCheck()
-	return result
+    return result
 end
 
 local old_ISWorldMapSymbolTool_AddNote_onAddNote = ISWorldMapSymbolTool_AddNote.onAddNote
 function ISWorldMapSymbolTool_AddNote:onAddNote(button, playerNum)
-	local result = old_ISWorldMapSymbolTool_AddNote_onAddNote(self, button, playerNum)
-	defaultSendFactionCheck()
-	return result
+    local result = old_ISWorldMapSymbolTool_AddNote_onAddNote(self, button, playerNum)
+    defaultSendFactionCheck()
+    return result
 end
 
 local old_ISWorldMapSymbolTool_EditNote_onEditNote = ISWorldMapSymbolTool_EditNote.onEditNote
 function ISWorldMapSymbolTool_EditNote:onEditNote(button, symbol)
-	local result = old_ISWorldMapSymbolTool_EditNote_onEditNote(self, button, symbol)
-	defaultSendFactionCheck()
-	return result
+    local result = old_ISWorldMapSymbolTool_EditNote_onEditNote(self, button, symbol)
+    defaultSendFactionCheck()
+    return result
 end
 
 local old_ISWorldMapSymbolTool_RemoveAnnotation_removeAnnotation = ISWorldMapSymbolTool_RemoveAnnotation.removeAnnotation
 function ISWorldMapSymbolTool_RemoveAnnotation:removeAnnotation()
-	local result = old_ISWorldMapSymbolTool_RemoveAnnotation_removeAnnotation(self)
-	defaultSendFactionCheck()
-	return result
+    local result = old_ISWorldMapSymbolTool_RemoveAnnotation_removeAnnotation(self)
+    defaultSendFactionCheck()
+    return result
 end
-
 
 local old_ISWorldMapSymbolTool_MoveAnnotation_onMouseUp = ISWorldMapSymbolTool_MoveAnnotation.onMouseUp
 function ISWorldMapSymbolTool_MoveAnnotation:onMouseUp(x, y)
-	local result = old_ISWorldMapSymbolTool_MoveAnnotation_onMouseUp(self, x, y)
-	if result then
+    local result = old_ISWorldMapSymbolTool_MoveAnnotation_onMouseUp(self, x, y)
+    if result then
         defaultSendFactionCheck()
     end
-	return result
+    return result
 end

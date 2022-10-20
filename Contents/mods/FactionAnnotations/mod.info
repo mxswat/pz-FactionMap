@@ -1,4 +1,4 @@
-name=Faction Annotations
+name=Shared Faction Map
 id=FactionMap
 description=This mod gives you a [b]new standalone map layer[/b] that your faction members can update from anywhere on the map, and the changes to it will appear on everyone else's faction layers.
 poster=poster.png
