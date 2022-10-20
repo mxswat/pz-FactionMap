@@ -122,3 +122,13 @@ function ISWorldMapSymbolTool_RemoveAnnotation:removeAnnotation()
 	defaultSendFactionCheck()
 	return result
 end
+
+
+local old_ISWorldMapSymbolTool_MoveAnnotation_onMouseUp = ISWorldMapSymbolTool_MoveAnnotation.onMouseUp
+function ISWorldMapSymbolTool_MoveAnnotation:onMouseUp(x, y)
+	local result = old_ISWorldMapSymbolTool_MoveAnnotation_onMouseUp(self, x, y)
+	if result then
+        defaultSendFactionCheck()
+    end
+	return result
+end
