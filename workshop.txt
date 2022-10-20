@@ -51,4 +51,5 @@ description=This mod can only be added to and extended with the express permissi
 description=If no permission is received you may not alter the mod, and it must be treated as a mod that is 'On Lockdown'.
 description=[url=http://theindiestone.com/forums/index.php/topic/2530-mod-permissions/?p=36478][img=http://projectzomboid.com/images/MODS_03.png][/url]
 description=tags=Build 41;Balance;Interface;Map;Misc;Multiplayer;Realistic;Silly/Fun
+tags=Build 41;Balance;Hardmode;Interface;Map;Misc;Multiplayer;Realistic;Silly/Fun
 visibility=public
