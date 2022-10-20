@@ -1,0 +1,5 @@
+version=1
+title=Faction Annotations
+description=This is the description of Faction Annotations.
+tags=
+visibility=public
