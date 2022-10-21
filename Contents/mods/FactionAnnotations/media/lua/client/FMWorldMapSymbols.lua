@@ -89,6 +89,13 @@ function ISWorldMap.ShowWorldMap(playerNum)
         return result
     end
 
+    local vanillaSymbols = FactionMap:getStoredVanillaSymbols()
+    if not vanillaSymbols or #vanillaSymbols == 0 then
+        -- If someone has installed the mod on an existing save
+        -- Backup their data before doing anything
+        FactionMap:storeCurrentMap();
+    end
+
     if not FactionMap.isToggled or not isInFaction then
         FactionMap:showVanillaMap()
         return result
