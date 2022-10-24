@@ -1,6 +1,6 @@
 version=1
 id=2877685881
-title=Shared Faction Map
+title=Shared Faction/Coop Map Symbols
 description=This mod gives you a [b]new standalone map layer[/b] that your faction members can update from anywhere on the map, and the changes to it will appear on everyone else's faction layers [b]IN REAL TIME![/b].
 description=
 description=Preview: https://imgur.com/a/wtJNX7q
@@ -37,6 +37,7 @@ description=
 description=Q: Is this compatible with [Name Here]?
 description=A: It should be compatible with all mods
 description=A: It's compatible for sure with Extra Map Symbols
+description=A: Fixed issues with "Soul Filcher's Awesome Time"
 description=
 description=Q: Can you help me with the server/save/random thing?
 description=A: Sorry, I'm very busy, so probably no. Head to the Zomboid discord server https://discord.com/invite/theindiestone, and ask for support in #mod-support
