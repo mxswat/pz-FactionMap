@@ -15,12 +15,13 @@ function ISWorldMapSymbols:createChildren()
     self.toggleFactionMapButton.borderColor.a = 0.0
     self.toggleFactionMapButton.enable = false
 
+    self:addChild(self.toggleFactionMapButton)
+    self:setHeight(self.toggleFactionMapButton:getBottom() + 20)
+
     -- Gamepad support. Voila.
     self.toggleFactionMapButton.internal = "TOGGLE.FACTION.MAP"
     self:insertNewLineOfButtons(self.toggleFactionMapButton)
-
-    self:addChild(self.toggleFactionMapButton)
-    self:setHeight(self.toggleFactionMapButton:getBottom() + 20)
+    
     self:checkInventory()
 
     -- Patch for 2701170568\mods\ExtraMapSymbolsUI\media\lua\client\ExtraMapSymbolsUI.lua
