@@ -15,6 +15,10 @@ function ISWorldMapSymbols:createChildren()
     self.toggleFactionMapButton.borderColor.a = 0.0
     self.toggleFactionMapButton.enable = false
 
+    -- Gamepad support. Voila.
+    self.toggleFactionMapButton.internal = "TOGGLE.FACTION.MAP"
+    self:insertNewLineOfButtons(self.toggleFactionMapButton)
+
     self:addChild(self.toggleFactionMapButton)
     self:setHeight(self.toggleFactionMapButton:getBottom() + 20)
     self:checkInventory()
